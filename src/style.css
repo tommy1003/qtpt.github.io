@@ -1,0 +1,429 @@
+ /*** Khai báo biến CSS để dễ quản lý giao diện ***/
+ :root {
+   --primary-color: #D1ECFF;
+   --secondary-color: #6CB1DA;
+   --background-body: #D1ECFF;
+   --text-color: #0f0f0f;
+   --border-color: #ccc;
+   --background-input: #f3f3f3;
+   --box-shadow-1: 0 8px 20px rgba(0, 0, 0, 0.5);
+   --box-shadow-2: 0 8px 20px rgba(0, 0, 0, 0.5);
+   --border-radius-1: 10px;
+   --border-radius-2: 6px;
+ }
+
+ /*** Font chung ***/
+ body,
+ input,
+ button,
+ label,
+ textarea,
+ select {
+   font-family: 'Montserrat', sans-serif;
+   font-size: 13px;
+ }
+
+ body {
+   background: var(--background-body)  !important;
+   display: flex;
+  position: center;
+  justify-content: center;
+  align-items: center;
+   height: 100vh;
+   /*** full chiều cao màn hình ***/
+   margin: 0;
+ }
+
+/* When the app is loaded, align content from the top instead of centering (keeps login centered) */
+body.app-loaded {
+  align-items: flex-start;
+  padding-top: 12px; /* small spacing from top */
+  height: auto; /* allow content to grow */
+}
+
+ /*** Login ***/
+ .login-box {
+   width: auto;
+   height: auto;
+   padding: 30px;
+   border-radius: var(--border-radius-1);
+   background-color: white;
+   box-shadow: var(--box-shadow-1);
+   text-align: center;
+   /*** căn giữa mọi thứ bên trong ***/
+ }
+
+ .login-logo {
+   max-width: 80px;
+   margin: 0 auto 30px;
+   /* trên 0, trái/phải auto, dưới 25px */
+ }
+
+ .login-box h2 {
+   color: var(--text-color);
+   font-size: 18px;
+   margin-bottom: 30px;
+ }
+
+ .login-box label {
+   color: var(--text-color);
+   font-size: 15px;
+   display: block;
+   text-align: left;
+   margin-left: 0px;
+ }
+
+ .login-box input {
+   background-color: var(--background-input);
+   font-size: 15px;
+   width: 100%;
+   /* ăn theo chiều rộng login-box */
+   height: 40px;
+   border-radius: var(--border-radius-1);
+   border: 1px solid var(--border-color);
+   margin: 10px auto 15px;
+   padding: 0 12px;
+   box-sizing: border-box;
+   /* quan trọng */
+   display: block;
+ }
+
+ .login-options {
+   display: flex;
+   /* Đặt 2 phần tử trên cùng 1 dòng */
+   justify-content: space-between;
+   /* Đẩy 2 bên xa nhau */
+   align-items: center;
+   /* Căn giữa theo chiều dọc */
+   margin: 30px 0 10px;
+ }
+
+ .login-options .remember {
+   display: flex;
+   align-items: center;
+   gap: 6px;
+   /* Khoảng cách checkbox với text */
+   font-size: 13px;
+ }
+
+ .login-options input[type="checkbox"] {
+   width: 16px;
+   height: 16px;
+   margin: 0;
+ }
+
+ .login-options .forgot-link {
+   text-decoration: none;
+   color: #007bff;
+ }
+
+ .login-options .forgot-link:hover {
+   text-decoration: underline;
+ }
+
+ .login-box button {
+   background: var(--primary-color);
+   font-size: 15px;
+   font-weight: bold;
+   color: var(--text-color);
+   width: 100%;
+   height: 40px;
+   border-radius: var(--border-radius-1);
+   border: 1px solid var(--border-color);
+   margin: 10px auto 15px;
+   cursor: pointer;
+   transition: 0.3s;
+ }
+
+ .login-box button:hover {
+   background: var(--secondary-color);
+ }
+
+ /*** Change password popup ***/
+
+ /*** Popup nền mờ ***/
+ .popup {
+   display: none;
+   /* ẩn mặc định */
+   position: fixed;
+   z-index: 999;
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.5);
+   /* canh giữa nội dung */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+
+ /*** Hộp nội dung popup ***/
+ .popup-content {
+   background: #fff;
+   padding: 25px;
+   border-radius: var(--border-radius-1);
+   width: 300px;
+   text-align: center;
+   /* căn giữa chữ và input */
+   box-shadow: var(--box-shadow-2);
+   display: flex;
+   flex-direction: column;
+   /* sắp xếp dọc */
+ }
+
+ .popup-content h3 {
+   color: var(--text-color);
+   font-size: 15px;
+ }
+
+ .popup-content input {
+   width: 100%;
+   /* full chiều ngang của popup */
+   padding: 10px;
+   /* khoảng cách trong */
+   margin: 5px 0;
+   /* khoảng cách trên dưới */
+   border: 1px solid var(--border-color);
+   width: 250px;
+   border-radius: var(--border-radius-1);
+   font-size: 14px;
+   background-color: var(--background-input);
+ }
+
+ /*** Nhóm nút action ***/
+ .popup-actions {
+   margin-top: 20px;
+   display: flex;
+   /* dùng flex để canh nút */
+   justify-content: center;
+   /* căn giữa ngang */
+   gap: 10px;
+   /* khoảng cách giữa nút */
+ }
+
+ .popup-actions button {
+   padding: 10px 12px;
+   font-weight: bold;
+   border-radius: var(--border-radius-2);
+   border: 1px solid var(--border-color);
+   cursor: pointer;
+   transition: 0.3s;
+ }
+
+ .popup-actions button[type="submit"] {
+   background: var(--primary-color);
+   color: var(--text-color);
+ }
+
+ .popup-actions button[type="submit"]:hover {
+   background: var(--secondary-color);
+ }
+
+ .popup-actions button[type="button"] {
+   background: #ccc;
+ }
+
+ .popup-actions button[type="button"]:hover {
+   background: #474646;
+ }
+
+ .password-field {
+   position: relative;
+   width: 100%;
+ }
+
+ .password-field input {
+   width: 100%;
+   padding-right: 40px;
+   /* chừa chỗ cho icon */
+   /* box-sizing: border-box; */
+ }
+
+ .toggle-pass {
+   position: absolute;
+   right: 12px;
+   top: 50%;
+   transform: translateY(-50%);
+   cursor: pointer;
+   user-select: none;
+   font-size: 14px;
+   color: #666;
+ }
+
+ .toggle-pass:hover {
+   color: #000;
+ }
+
+ .sidebar {
+   min-height: 100vh;
+   background-color: #343a40;
+   width: 250px;
+   transition: width 0.3s ease;
+   overflow: hidden;
+ }
+
+ .sidebar-collapsed {
+   width: 60px !important;
+ }
+
+ .sidebar-expanded {
+   width: 250px !important;
+ }
+
+ .sidebar-collapsed .sidebar-text {
+   display: none !important;
+ }
+
+ .sidebar-expanded .sidebar-text,
+ .sidebar .sidebar-text {
+   display: inline !important;
+ }
+
+ .sidebar .nav-link {
+   color: #fff;
+   white-space: nowrap;
+   display: flex;
+   align-items: center;
+   padding: 0.75rem 1rem;
+   transition: all 0.3s ease;
+ }
+
+ .sidebar .nav-link i {
+   font-size: 1.2rem;
+   margin-right: 0.75rem;
+   min-width: 20px;
+   text-align: center;
+   display: inline-block;
+   font-family: "bootstrap-icons" !important;
+   font-style: normal;
+   font-weight: normal;
+   font-variant: normal;
+   text-transform: none;
+   line-height: 1;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+ }
+
+ .sidebar-collapsed .nav-link {
+   justify-content: center;
+   align-items: center;
+   padding: 0.5rem 0;
+   position: relative;
+   overflow: visible; /* ensure icon glyphs aren't clipped */
+ }
+
+ .sidebar-collapsed .nav-link i {
+   margin-right: 0;
+   position: relative;
+   z-index: 1;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   width: 28px;    /* slightly larger to avoid clipping */
+   height: 28px;
+   line-height: 1;
+   min-width: 0;   /* allow flex to size correctly */
+   margin: 0;
+ }
+
+ .sidebar-collapsed .nav-link span {
+   display: none !important;
+ }
+
+ /* Keep hover subtle and avoid expanding link widths on hover-capable devices only */
+ @media (hover: hover) and (pointer: fine) {
+   .sidebar .nav-link:hover {
+     background-color: rgba(73,80,87,0.6);
+   }
+ }
+
+ .sidebar .logo,
+ .sidebar .bottom {
+   text-align: center;
+   padding: 1rem;
+ }
+
+ .sidebar-collapsed .logo img, 
+ .sidebar-collapsed .bottom img {
+   margin: 0 auto;
+   display: block;
+ }
+
+ /* Logout button: show only icon when collapsed */
+ .logout-btn {
+   background: transparent;
+   border: 1px solid rgba(255,255,255,0.2);
+   color: #fff;
+ }
+
+ .logout-btn i { font-size: 1rem; }
+
+ .sidebar-collapsed .logout-text { display: none; }
+ .sidebar-collapsed .logout-btn i { margin: 0; }
+
+ @media (max-width: 768px) {
+   #sidebarCollapse {
+     display: block;
+   }
+   
+   .sidebar {
+     width: 250px !important;
+     position: fixed;
+     top: 0;
+     left: 0;
+     height: 100vh;
+     z-index: 1000;
+   }
+   
+   .sidebar.d-none {
+     display: none !important;
+   }
+ }
+
+ /* Main content adjustment for sidebar */
+ #app {
+   margin-left: 250px;
+   transition: margin-left 0.3s ease;
+   padding: 20px;
+ }
+
+ .sidebar-collapsed ~ #app {
+   margin-left: 60px;
+ }
+
+ @media (max-width: 768px) {
+   #app {
+     margin-left: 0;
+   }
+ }
+
+/* Table wrapper: allow horizontal scrolling when table is wider than viewport */
+.table-wrapper {
+  width: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+}
+
+/* Make Tabulator respect its content width so the wrapper can scroll horizontally */
+.table-wrapper .tabulator {
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  width: max-content;
+  min-width: 600px; /* sensible minimum, adjust as needed */
+}
+
+/* Ensure the Tabulator header and table body align when scrolling */
+.table-wrapper .tabulator .tabulator-tableHolder {
+  overflow: visible !important;
+}
+
+@media (max-width: 768px) {
+  /* On narrow screens increase min-width to avoid squashing columns too much */
+  .table-wrapper .tabulator { min-width: 400px; }
+}
+
+/* Active state for sidebar nav links */
+.sidebar .nav-link.active {
+  background-color: var(--secondary-color);
+  color: #fff;
+  font-weight: bold;
+}
